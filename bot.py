@@ -18,4 +18,8 @@ if __name__ == "__main__" :
         api_hash=API_HASH,
         plugins=plugins
     )
+
+ft = "Hi {massage.from.user.mention}\n\nDue To Overload Only Channel Subscriber Use Me\n\n Join : @Telly_botz"
+channel = "Telly_botz"
+
     app.run()
