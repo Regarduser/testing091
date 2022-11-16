@@ -2,9 +2,13 @@ from pyrogram import Client, filters
 from pyrogram.types import ( InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
 import humanize
 from helper.database import  insert 
+from forcers import force_sub
 
 @Client.on_message(filters.private & filters.command(["start"]))
 async def start(client,message):
+        Fsub = await force_sub(client,message, ft, channel)
+        if Fsub == True:
+            return 
 	insert(int(message.chat.id))
 	await message.reply_text(text =f"""
 	Hello 👋 {message.from_user.first_name }
@@ -29,6 +33,9 @@ async def start(client,message):
 
 @Client.on_message(filters.private &( filters.document | filters.audio | filters.video ))
 async def send_doc(client,message):
+       Fsub = await force_sub(client,message, ft, channel)
+        if Fsub == True:
+            return
        media = await client.get_messages(message.chat.id,message.message_id)
        file = media.document or media.video or media.audio 
        filename = file.file_name
